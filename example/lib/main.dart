@@ -55,10 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
   final _formKey = GlobalKey<FormState>();
 
   final controller = MultiSelectController<User>();
-
+  List<DropdownItem<User>> items = [];
   @override
-  Widget build(BuildContext context) {
-    var items = [
+  void initState() {
+    super.initState();
+    items = [
       DropdownItem(label: 'Nepal', value: User(name: 'Nepal', id: 1)),
       DropdownItem(label: 'Australia', value: User(name: 'Australia', id: 6)),
       DropdownItem(label: 'India', value: User(name: 'India', id: 2)),
@@ -68,6 +69,10 @@ class _MyHomePageState extends State<MyHomePage> {
       DropdownItem(label: 'Germany', value: User(name: 'Germany', id: 7)),
       DropdownItem(label: 'France', value: User(name: 'France', id: 8)),
     ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -167,7 +172,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              controller.clearAll();
+                              // controller.clearAll();
+                              setState(() {
+                                items = [];
+                              });
                             },
                             child: const Text('Unselect All'),
                           ),

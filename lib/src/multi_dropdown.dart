@@ -353,11 +353,7 @@ class _MultiDropdownState<T extends Object> extends State<MultiDropdown<T>> {
     }
     if (oldWidget.items != widget.items) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _dropdownController
-          ..setItems(widget.items)
-          ..addListener(_controllerListener)
-          .._setOnSelectionChange(widget.onSelectionChange)
-          .._setOnSearchChange(widget.onSearchChange);
+        _dropdownController.setItems(widget.items);
 
         // if close on back button is enabled, then add the listener
         _listenBackButton();
