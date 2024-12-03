@@ -351,6 +351,18 @@ class _MultiDropdownState<T extends Object> extends State<MultiDropdown<T>> {
 
       _initializeController();
     }
+    if (oldWidget.items != widget.items) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _dropdownController
+          ..setItems(widget.items)
+          ..addListener(_controllerListener)
+          .._setOnSelectionChange(widget.onSelectionChange)
+          .._setOnSearchChange(widget.onSearchChange);
+
+        // if close on back button is enabled, then add the listener
+        _listenBackButton();
+      });
+    }
 
     // if the focus node is changed, then dispose the old focus node
     // and initialize the new focus node.
